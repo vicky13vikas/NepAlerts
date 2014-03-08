@@ -17,7 +17,25 @@
     UINavigationBar *navBar = [UINavigationBar appearance];
     navBar.barTintColor = [UIColor colorWithRed:36/255.0f green:112.0/255.0f blue:176.0/255.0f alpha:1.0];
     
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                                           UIRemoteNotificationTypeSound |
+                                                                           UIRemoteNotificationTypeAlert)];
+    
     return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSLog(@"My token is: %@", deviceToken);
+    NSString *dToken = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    dToken = [dToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSLog(@"STR : %@",dToken);
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
