@@ -7,7 +7,8 @@
 //
 
 #import "RegisterViewController.h"
-#import "AFHTTPRequestOperationManager.h"
+#import "AFAppClient.h"
+#import "UIActivityIndicatorView+AFNetworking.h"
 
 @interface RegisterViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *tfFirstName;
@@ -40,9 +41,33 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSDictionary *)getParameters
+{
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"25", @"user_id",
+                                nil];
+    
+    return parameters;
+}
+
 - (IBAction)submitTapped:(id)sender
 {
-    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:SERVER_BASE_URL];
+    AFURLConnectionOperation *operation = [[AFAppClient sharedClient] POST:@"RegistrationService.svc/StartRegister"
+                          parameters:[self getParameters]
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 
+                                 NSString *string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+
+                                 NSLog(@"%@", string);
+                             }
+                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 NSLog(@"%@", error);
+                             }];
+    
+//    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//    [activityIndicator setAnimatingWithStateOfOperation:operation];
+//    activityIndicator.frame = CGRectMake(100, 100, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
+//    [self.view addSubview:activityIndicator];
 }
 
 #pragma mark - UITextFieldDelegate

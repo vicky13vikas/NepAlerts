@@ -22,6 +22,7 @@
 		4E5E367718CA101400401EA1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E5E367518CA101400401EA1 /* InfoPlist.strings */; };
 		4E5E367918CA101400401EA1 /* NepalertsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E367818CA101400401EA1 /* NepalertsTests.m */; };
 		4E5E368718CA13A600401EA1 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E368618CA13A600401EA1 /* RegisterViewController.m */; };
+		4EAB07F018CB977200549BEE /* AFAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAB07EF18CB977200549BEE /* AFAppClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		4E5E367818CA101400401EA1 /* NepalertsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NepalertsTests.m; sourceTree = "<group>"; };
 		4E5E368518CA13A600401EA1 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		4E5E368618CA13A600401EA1 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		4EAB07EE18CB977200549BEE /* AFAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppClient.h; sourceTree = "<group>"; };
+		4EAB07EF18CB977200549BEE /* AFAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAppClient.m; sourceTree = "<group>"; };
 		D6923E63613D46D0AFB15CA3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9EB8F550CB64DA4AB15EBC6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +128,8 @@
 				4E5E368518CA13A600401EA1 /* RegisterViewController.h */,
 				4E5E368618CA13A600401EA1 /* RegisterViewController.m */,
 				09C9CA7C18CB492D00BBDB58 /* Constants.h */,
+				4EAB07EE18CB977200549BEE /* AFAppClient.h */,
+				4EAB07EF18CB977200549BEE /* AFAppClient.m */,
 				4E5E366518CA101400401EA1 /* Images.xcassets */,
 				4E5E365418CA101400401EA1 /* Supporting Files */,
 			);
@@ -295,6 +300,7 @@
 				4E5E365E18CA101400401EA1 /* AppDelegate.m in Sources */,
 				4E5E368718CA13A600401EA1 /* RegisterViewController.m in Sources */,
 				4E5E365A18CA101400401EA1 /* main.m in Sources */,
+				4EAB07F018CB977200549BEE /* AFAppClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
