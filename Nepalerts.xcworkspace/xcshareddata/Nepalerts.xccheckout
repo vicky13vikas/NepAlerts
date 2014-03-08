@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>177ED8B4-7B48-486A-950F-CD39AEEF9C24</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Nepalerts</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>579FD4BE-C8B1-4551-8C94-F5AE33E3CD7D</key>
+		<string>https://github.com/vicky13vikas/NepAlerts.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Nepalerts.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>579FD4BE-C8B1-4551-8C94-F5AE33E3CD7D</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/vicky13vikas/NepAlerts.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>579FD4BE-C8B1-4551-8C94-F5AE33E3CD7D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>579FD4BE-C8B1-4551-8C94-F5AE33E3CD7D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>NepAlerts</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -7,6 +7,7 @@
 //
 
 #import "RegisterViewController.h"
+#import "AFHTTPRequestOperationManager.h"
 
 @interface RegisterViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *tfFirstName;
@@ -41,7 +42,7 @@
 
 - (IBAction)submitTapped:(id)sender
 {
-    
+    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:SERVER_BASE_URL];
 }
 
 #pragma mark - UITextFieldDelegate
