@@ -115,11 +115,10 @@
     
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults] valueForKey:DEVICE_TOKEN];
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                name, @"Name",
-                                _tfCity.text, @"City",
-                                _tfArea.text, @"Area",
-                                deviceToken, @"RegId",
-                                @"iOS", @"OsType",
+                                name, @"name",
+                                [NSString stringWithFormat:@"%d",_selectedArea.areaID], @"city_area_id",
+                                deviceToken, @"registration_id",
+                                @"iOS", @"os_type",
                                 nil];
     
     return parameters;
