@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Constants.h"
 
 @implementation AppDelegate
 
@@ -31,6 +32,9 @@
     dToken = [dToken stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     NSLog(@"STR : %@",dToken);
+    
+    [[NSUserDefaults standardUserDefaults] setValue:dToken forKey:DEVICE_TOKEN];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error

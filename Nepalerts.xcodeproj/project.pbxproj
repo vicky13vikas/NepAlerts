@@ -122,14 +122,13 @@
 		4E5E365318CA101400401EA1 /* Nepalerts */ = {
 			isa = PBXGroup;
 			children = (
+				4EAB968E18CC223400DEC6BB /* Networking */,
 				4E5E365C18CA101400401EA1 /* AppDelegate.h */,
 				4E5E365D18CA101400401EA1 /* AppDelegate.m */,
 				4E5E365F18CA101400401EA1 /* Main.storyboard */,
 				4E5E368518CA13A600401EA1 /* RegisterViewController.h */,
 				4E5E368618CA13A600401EA1 /* RegisterViewController.m */,
 				09C9CA7C18CB492D00BBDB58 /* Constants.h */,
-				4EAB07EE18CB977200549BEE /* AFAppClient.h */,
-				4EAB07EF18CB977200549BEE /* AFAppClient.m */,
 				4E5E366518CA101400401EA1 /* Images.xcassets */,
 				4E5E365418CA101400401EA1 /* Supporting Files */,
 			);
@@ -163,6 +162,15 @@
 				4E5E367518CA101400401EA1 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4EAB968E18CC223400DEC6BB /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				4EAB07EE18CB977200549BEE /* AFAppClient.h */,
+				4EAB07EF18CB977200549BEE /* AFAppClient.m */,
+			);
+			name = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

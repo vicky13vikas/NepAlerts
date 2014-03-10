@@ -8,3 +8,5 @@
 
 
 #define SERVER_BASE_URL @"http://210.212.195.100:8088/"
+
+#define DEVICE_TOKEN @"deviceToken"

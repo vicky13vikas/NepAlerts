@@ -9,12 +9,18 @@
 #import "RegisterViewController.h"
 #import "AFAppClient.h"
 #import "UIActivityIndicatorView+AFNetworking.h"
+#import "SVProgressHUD.h"
 
 @interface RegisterViewController ()
+{
+    BOOL isKeyboardVisible;
+}
+
 @property (weak, nonatomic) IBOutlet UITextField *tfFirstName;
 @property (weak, nonatomic) IBOutlet UITextField *tfLastName;
 @property (weak, nonatomic) IBOutlet UITextField *tfCity;
 @property (weak, nonatomic) IBOutlet UITextField *tfArea;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
@@ -35,6 +41,57 @@
 	// Do any additional setup after loading the view.
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)keyBoardWillShow:(NSNotification*)notification
+{
+    if(!isKeyboardVisible)
+    {
+        isKeyboardVisible = YES;
+        NSDictionary* keyboardInfo = [notification userInfo];
+        NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+        CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+        
+        CGRect frame = _scrollView.frame;
+        frame.size.height = frame.size.height - keyboardFrameBeginRect.size.height;
+        _scrollView.frame = frame;
+    }
+}
+
+-(void)keyBoardWillHide:(NSNotification*)notification
+{
+    if(isKeyboardVisible)
+    {
+        isKeyboardVisible = NO;
+        NSDictionary* keyboardInfo = [notification userInfo];
+        NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+        CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+        
+        CGRect frame = _scrollView.frame;
+        frame.size.height = frame.size.height + keyboardFrameBeginRect.size.height;
+        _scrollView.frame = frame;
+    }
+}
+
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self.scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height)];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -43,8 +100,20 @@
 
 -(NSDictionary *)getParameters
 {
+    NSMutableString *name  = [NSMutableString stringWithString:_tfFirstName.text];
+    if(_tfLastName.text.length > 0)
+    {
+        [name appendString:@" "];
+        [name appendString:_tfLastName.text];
+    }
+    
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults] valueForKey:DEVICE_TOKEN];
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                @"25", @"user_id",
+                                name, @"Name",
+                                _tfCity.text, @"City",
+                                _tfArea.text, @"Area",
+                                deviceToken, @"RegId",
+                                @"iOS", @"OsType",
                                 nil];
     
     return parameters;
@@ -52,22 +121,22 @@
 
 - (IBAction)submitTapped:(id)sender
 {
-    AFURLConnectionOperation *operation = [[AFAppClient sharedClient] POST:@"RegistrationService.svc/StartRegister"
+    SVProgressHUD *progressHud = [SVProgressHUD appearance];
+    progressHud.hudBackgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    [SVProgressHUD showWithStatus:@"Sending..." maskType:SVProgressHUDMaskTypeClear];
+    
+    [[AFAppClient sharedClient] POST:@"RegistrationService.svc/StartRegister"
                           parameters:[self getParameters]
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                 
+                                 [SVProgressHUD dismiss];
                                  NSString *string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 
                                  NSLog(@"%@", string);
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 [SVProgressHUD dismiss];
                                  NSLog(@"%@", error);
                              }];
-    
-//    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//    [activityIndicator setAnimatingWithStateOfOperation:operation];
-//    activityIndicator.frame = CGRectMake(100, 100, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
-//    [self.view addSubview:activityIndicator];
 }
 
 #pragma mark - UITextFieldDelegate
