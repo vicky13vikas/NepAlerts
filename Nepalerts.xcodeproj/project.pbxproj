@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09C3063518CD8357009B2C8E /* CitiesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3063418CD8357009B2C8E /* CitiesTableViewController.m */; };
+		09C3063A18CD93B5009B2C8E /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3063918CD93B5009B2C8E /* City.m */; };
 		0E989016427E4360BF2E6F87 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6923E63613D46D0AFB15CA3 /* libPods.a */; };
 		4E5E364E18CA101400401EA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5E364D18CA101400401EA1 /* Foundation.framework */; };
 		4E5E365018CA101400401EA1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5E364F18CA101400401EA1 /* CoreGraphics.framework */; };
@@ -36,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09C3063318CD8357009B2C8E /* CitiesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitiesTableViewController.h; sourceTree = "<group>"; };
+		09C3063418CD8357009B2C8E /* CitiesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitiesTableViewController.m; sourceTree = "<group>"; };
+		09C3063818CD93B5009B2C8E /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
+		09C3063918CD93B5009B2C8E /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
 		09C9CA7C18CB492D00BBDB58 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		4E5E364A18CA101400401EA1 /* Nepalerts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nepalerts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E5E364D18CA101400401EA1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -87,6 +93,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09C3063718CD9398009B2C8E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				09C3063818CD93B5009B2C8E /* City.h */,
+				09C3063918CD93B5009B2C8E /* City.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		4E5E364118CA101400401EA1 = {
 			isa = PBXGroup;
 			children = (
@@ -122,12 +137,15 @@
 		4E5E365318CA101400401EA1 /* Nepalerts */ = {
 			isa = PBXGroup;
 			children = (
+				09C3063718CD9398009B2C8E /* Model */,
 				4EAB968E18CC223400DEC6BB /* Networking */,
 				4E5E365C18CA101400401EA1 /* AppDelegate.h */,
 				4E5E365D18CA101400401EA1 /* AppDelegate.m */,
 				4E5E365F18CA101400401EA1 /* Main.storyboard */,
 				4E5E368518CA13A600401EA1 /* RegisterViewController.h */,
 				4E5E368618CA13A600401EA1 /* RegisterViewController.m */,
+				09C3063318CD8357009B2C8E /* CitiesTableViewController.h */,
+				09C3063418CD8357009B2C8E /* CitiesTableViewController.m */,
 				09C9CA7C18CB492D00BBDB58 /* Constants.h */,
 				4E5E366518CA101400401EA1 /* Images.xcassets */,
 				4E5E365418CA101400401EA1 /* Supporting Files */,
@@ -307,8 +325,10 @@
 			files = (
 				4E5E365E18CA101400401EA1 /* AppDelegate.m in Sources */,
 				4E5E368718CA13A600401EA1 /* RegisterViewController.m in Sources */,
+				09C3063A18CD93B5009B2C8E /* City.m in Sources */,
 				4E5E365A18CA101400401EA1 /* main.m in Sources */,
 				4EAB07F018CB977200549BEE /* AFAppClient.m in Sources */,
+				09C3063518CD8357009B2C8E /* CitiesTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

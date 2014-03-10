@@ -17,6 +17,14 @@
     
     UINavigationBar *navBar = [UINavigationBar appearance];
     navBar.barTintColor = [UIColor colorWithRed:36/255.0f green:112.0/255.0f blue:176.0/255.0f alpha:1.0];
+    navBar.tintColor = [UIColor whiteColor];
+    navBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIColor whiteColor],
+      NSForegroundColorAttributeName,
+      [UIColor whiteColor],
+      NSForegroundColorAttributeName,
+      nil];
+
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                                                            UIRemoteNotificationTypeSound |

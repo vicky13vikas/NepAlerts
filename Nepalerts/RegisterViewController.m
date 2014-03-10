@@ -10,10 +10,13 @@
 #import "AFAppClient.h"
 #import "UIActivityIndicatorView+AFNetworking.h"
 #import "SVProgressHUD.h"
+#import "CitiesTableViewController.h"
+#import "City.h"
 
-@interface RegisterViewController ()
+@interface RegisterViewController ()<CityDelegate>
 {
     BOOL isKeyboardVisible;
+    City * _selectedCity;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *tfFirstName;
@@ -139,10 +142,27 @@
                              }];
 }
 
+-(void)dismissKeyboard
+{
+    [_tfFirstName resignFirstResponder];
+    [_tfLastName resignFirstResponder];
+    [_tfCity resignFirstResponder];
+    [_tfArea resignFirstResponder];
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    
+    if([textField isEqual:_tfCity])
+    {
+        CitiesTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CitiesTableViewController"];
+        vc.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
+        [self dismissKeyboard];
+        return NO;
+    }
     return YES;
 }
 
@@ -165,6 +185,12 @@
 
     }
     return YES;
+}
+
+- (void)citySlected:(City*)city
+{
+    _tfCity.text = city.cityName;
+    _selectedCity = city;
 }
 
 @end
