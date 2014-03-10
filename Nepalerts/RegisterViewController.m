@@ -11,12 +11,15 @@
 #import "UIActivityIndicatorView+AFNetworking.h"
 #import "SVProgressHUD.h"
 #import "CitiesTableViewController.h"
+#import "AreasTableViewController.h"
 #import "City.h"
+#import "Area.h"
 
-@interface RegisterViewController ()<CityDelegate>
+@interface RegisterViewController ()<CityDelegate, AreaDelegate>
 {
     BOOL isKeyboardVisible;
     City * _selectedCity;
+    Area * _selectedArea;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *tfFirstName;
@@ -163,6 +166,23 @@
         [self dismissKeyboard];
         return NO;
     }
+    else if([textField isEqual:_tfArea])
+    {
+        if(!_selectedCity.cityID)
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Please select a city first" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+        }
+        else
+        {
+            AreasTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AreasTableViewController"];
+            vc.delegate = self;
+            vc.city = _selectedCity;
+            [self.navigationController pushViewController:vc animated:YES];
+            [self dismissKeyboard];
+        }
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -189,8 +209,16 @@
 
 - (void)citySlected:(City*)city
 {
+    _selectedArea = nil;
+    _tfArea.text = nil;
     _tfCity.text = city.cityName;
     _selectedCity = city;
+}
+
+-(void) areaSlected:(Area *)area forCity:(City *)city
+{
+    _tfArea.text = area.areaName;
+    _selectedArea = area;
 }
 
 @end

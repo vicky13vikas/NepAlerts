@@ -88,13 +88,10 @@
                                  NSDictionary *response = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:&error];
                                  
                                  for (NSDictionary *attributes in response) {
-                                     NSLog(@"ID : %@, Name :  %@", [attributes valueForKeyPath:@"id"], [attributes valueForKeyPath:@"name"]);
                                      City *city = [[City alloc] initWithAttributes:attributes];
                                      [_citiesList addObject:city];
                                  }
-                                 
                                  [self.tableView reloadData];
-                                 
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  [SVProgressHUD dismiss];

@@ -77,6 +77,10 @@
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="e6y-HU-ZHf"/>
                                         </connections>
                                     </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nextArr.png" translatesAutoresizingMaskIntoConstraints="NO" id="coz-fx-rtL">
+                                        <rect key="frame" x="280" y="151" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Area" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWF-I9-su4">
                                         <rect key="frame" x="20" y="150" width="84" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -97,6 +101,10 @@
                                             <action selector="submitTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZvZ-TC-WgK"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nextArr.png" translatesAutoresizingMaskIntoConstraints="NO" id="xXe-bg-mCz">
+                                        <rect key="frame" x="280" y="113" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -151,6 +159,34 @@
             </objects>
             <point key="canvasLocation" x="992" y="163"/>
         </scene>
+        <!--Areas Table View Controller-->
+        <scene sceneID="gJB-t1-E0T">
+            <objects>
+                <tableViewController storyboardIdentifier="AreasTableViewController" id="0Fu-3c-nrm" customClass="AreasTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9bj-g8-hMJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AreaCell" id="l8u-Kf-diD">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l8u-Kf-diD" id="GsK-OV-iK0">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="0Fu-3c-nrm" id="Gmc-P7-Typ"/>
+                            <outlet property="delegate" destination="0Fu-3c-nrm" id="Ybf-3h-tYd"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i2D-i0-qKG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1389" y="163"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="RPJ-7Z-5cp">
             <objects>
@@ -171,6 +207,9 @@
             <point key="canvasLocation" x="117" y="163"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="nextArr.png" width="512" height="512"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
