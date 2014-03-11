@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Constants.h"
+#import "TestFlight.h"
 
 @implementation AppDelegate
 
@@ -30,6 +31,8 @@
                                                                            UIRemoteNotificationTypeSound |
                                                                            UIRemoteNotificationTypeAlert)];
     
+    [TestFlight takeOff:@"bd107fbd-0cec-4096-822a-e2193b3ee4fa"];
+
     return YES;
 }
 
