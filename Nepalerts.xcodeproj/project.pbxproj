@@ -28,6 +28,8 @@
 		4E5E367918CA101400401EA1 /* NepalertsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E367818CA101400401EA1 /* NepalertsTests.m */; };
 		4E5E368718CA13A600401EA1 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E368618CA13A600401EA1 /* RegisterViewController.m */; };
 		4EAB07F018CB977200549BEE /* AFAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAB07EF18CB977200549BEE /* AFAppClient.m */; };
+		4EAED37418D8B5E300B11BCA /* State.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAED37318D8B5E300B11BCA /* State.m */; };
+		4EAED37718D8B6C900B11BCA /* StateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAED37618D8B6C900B11BCA /* StateTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,10 @@
 		4E5E368618CA13A600401EA1 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		4EAB07EE18CB977200549BEE /* AFAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppClient.h; sourceTree = "<group>"; };
 		4EAB07EF18CB977200549BEE /* AFAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAppClient.m; sourceTree = "<group>"; };
+		4EAED37218D8B5E300B11BCA /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		4EAED37318D8B5E300B11BCA /* State.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = State.m; sourceTree = "<group>"; };
+		4EAED37518D8B6C900B11BCA /* StateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateTableViewController.h; sourceTree = "<group>"; };
+		4EAED37618D8B6C900B11BCA /* StateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateTableViewController.m; sourceTree = "<group>"; };
 		D6923E63613D46D0AFB15CA3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9EB8F550CB64DA4AB15EBC6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +110,8 @@
 		09C3063718CD9398009B2C8E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4EAED37218D8B5E300B11BCA /* State.h */,
+				4EAED37318D8B5E300B11BCA /* State.m */,
 				09C3063818CD93B5009B2C8E /* City.h */,
 				09C3063918CD93B5009B2C8E /* City.m */,
 				09C3063B18CDBDFE009B2C8E /* Area.h */,
@@ -154,6 +162,8 @@
 				4E5E365F18CA101400401EA1 /* Main.storyboard */,
 				4E5E368518CA13A600401EA1 /* RegisterViewController.h */,
 				4E5E368618CA13A600401EA1 /* RegisterViewController.m */,
+				4EAED37518D8B6C900B11BCA /* StateTableViewController.h */,
+				4EAED37618D8B6C900B11BCA /* StateTableViewController.m */,
 				09C3063318CD8357009B2C8E /* CitiesTableViewController.h */,
 				09C3063418CD8357009B2C8E /* CitiesTableViewController.m */,
 				09C3064318CDC17E009B2C8E /* AreasTableViewController.h */,
@@ -340,9 +350,11 @@
 				09C3064518CDC17E009B2C8E /* AreasTableViewController.m in Sources */,
 				09C3063D18CDBDFE009B2C8E /* Area.m in Sources */,
 				4E5E365E18CA101400401EA1 /* AppDelegate.m in Sources */,
+				4EAED37418D8B5E300B11BCA /* State.m in Sources */,
 				4E5E368718CA13A600401EA1 /* RegisterViewController.m in Sources */,
 				09C3063A18CD93B5009B2C8E /* City.m in Sources */,
 				4E5E365A18CA101400401EA1 /* main.m in Sources */,
+				4EAED37718D8B6C900B11BCA /* StateTableViewController.m in Sources */,
 				4EAB07F018CB977200549BEE /* AFAppClient.m in Sources */,
 				09C3063518CD8357009B2C8E /* CitiesTableViewController.m in Sources */,
 			);
@@ -477,7 +489,7 @@
 				GCC_PREFIX_HEADER = "Nepalerts/Nepalerts-Prefix.pch";
 				INFOPLIST_FILE = "Nepalerts/Nepalerts-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E73C5B4F-03DB-4B12-9A52-5073AE434320";
+				PROVISIONING_PROFILE = "6D334497-7589-45DA-A62E-80F4B0375D41";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -493,7 +505,7 @@
 				GCC_PREFIX_HEADER = "Nepalerts/Nepalerts-Prefix.pch";
 				INFOPLIST_FILE = "Nepalerts/Nepalerts-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E73C5B4F-03DB-4B12-9A52-5073AE434320";
+				PROVISIONING_PROFILE = "6D334497-7589-45DA-A62E-80F4B0375D41";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

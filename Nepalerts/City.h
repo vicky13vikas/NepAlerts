@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "State.h"
 
 @interface City : NSObject
 
 @property (nonatomic, assign) NSUInteger cityID;
 @property (nonatomic, strong) NSString *cityName;
+@property (nonatomic, strong) State *state;
 
 - (instancetype)initWithAttributes:(NSDictionary *)attributes;
 

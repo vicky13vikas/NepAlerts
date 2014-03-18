@@ -1,23 +1,24 @@
 //
-//  AreasTableViewController.m
+//  StateTableViewController.m
 //  Nepalerts
 //
-//  Created by Vikas Kumar on 10/03/14.
+//  Created by Vikas kumar on 18/03/14.
 //  Copyright (c) 2014 Vikas kumar. All rights reserved.
 //
 
-#import "AreasTableViewController.h"
+#import "StateTableViewController.h"
 #import "AFAppClient.h"
 #import "SVProgressHUD.h"
+#import "State.h"
 
-@interface AreasTableViewController ()
+@interface StateTableViewController ()
 {
-    NSMutableArray *   _areaList;
+    NSMutableArray *   _statesList;
 }
 
 @end
 
-@implementation AreasTableViewController
+@implementation StateTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -31,9 +32,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _areaList = [[NSMutableArray alloc] init];
-    
-    [self requestAreasForCurrentCity];
+    _statesList = [[NSMutableArray alloc] init];
+    [self requsetListOfStates];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,36 +44,41 @@
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+
+    return 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _areaList.count;
+
+    return _statesList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"AreaCell";
+    static NSString *CellIdentifier = @"StateCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = [_areaList[indexPath.row] areaName];
-    // Configure the cell...
+    cell.textLabel.text = [((State*)_statesList[indexPath.row]) stateName];
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [_delegate areaSlected:_areaList[indexPath.row] forCity:_city];
+    [_delegate stateSlected:_statesList[indexPath.row]];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - Server Request
+#pragma mark - Sever Request -
 
--(void)requestAreasForCurrentCity
+-(void)requsetListOfStates
 {
     [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeClear];
     
-    [[AFAppClient sharedClient] GET:[NSString stringWithFormat:@"InfoSevice.svc/GetAreasOf/%lu",(unsigned long)_city.cityID]
+    [[AFAppClient sharedClient] GET:@"InfoSevice.svc/GetAllStates"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 [SVProgressHUD dismiss];
@@ -82,9 +87,8 @@
                                 NSDictionary *response = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:&error];
                                 
                                 for (NSDictionary *attributes in response) {
-                                    Area *area = [[Area alloc] initWithAttributes:attributes];
-                                    area.city = _city;
-                                    [_areaList addObject:area];
+                                    State *state = [[State alloc] initWithAttributes:attributes];
+                                    [_statesList addObject:state];
                                 }
                                 [self.tableView reloadData];
                             }
@@ -94,5 +98,6 @@
                             }];
     
 }
+
 
 @end

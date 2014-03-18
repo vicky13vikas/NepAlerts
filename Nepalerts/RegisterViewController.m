@@ -10,20 +10,21 @@
 #import "AFAppClient.h"
 #import "UIActivityIndicatorView+AFNetworking.h"
 #import "SVProgressHUD.h"
+#import "StateTableViewController.h"
 #import "CitiesTableViewController.h"
 #import "AreasTableViewController.h"
 #import "City.h"
 #import "Area.h"
 
-@interface RegisterViewController ()<CityDelegate, AreaDelegate>
+@interface RegisterViewController ()<StateDelegate, CityDelegate, AreaDelegate>
 {
     BOOL isKeyboardVisible;
+    State * _selectedState;
     City * _selectedCity;
     Area * _selectedArea;
 }
 
-@property (weak, nonatomic) IBOutlet UITextField *tfFirstName;
-@property (weak, nonatomic) IBOutlet UITextField *tfLastName;
+@property (weak, nonatomic) IBOutlet UITextField *tfState;
 @property (weak, nonatomic) IBOutlet UITextField *tfCity;
 @property (weak, nonatomic) IBOutlet UITextField *tfArea;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -106,19 +107,12 @@
 
 -(NSDictionary *)getParameters
 {
-    NSMutableString *name  = [NSMutableString stringWithString:_tfFirstName.text];
-    if(_tfLastName.text.length > 0)
-    {
-        [name appendString:@" "];
-        [name appendString:_tfLastName.text];
-    }
-    
+
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults] valueForKey:DEVICE_TOKEN];
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                name, @"name",
-                                [NSString stringWithFormat:@"%d",_selectedArea.areaID], @"city_area_id",
-                                deviceToken, @"registration_id",
-                                @"iOS", @"os_type",
+                                [NSString stringWithFormat:@"%lu",(unsigned long)_selectedArea.areaID], @"areaId",
+                                @"Simulator", @"regId",
+                                @"iOS", @"osType",
                                 nil];
     
     return parameters;
@@ -137,6 +131,15 @@
                                  NSString *string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 
                                  NSLog(@"%@", string);
+                                 
+                                 if([string isEqualToString:@"1"])
+                                 {
+                                     [[[UIAlertView alloc] initWithTitle:@"Nep Alerts" message:@"Submitted Successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                                 }
+                                 else
+                                 {
+                                     [[[UIAlertView alloc] initWithTitle:@"Nep Alerts" message:@"Request Failed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                                 }
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  [SVProgressHUD dismiss];
@@ -146,8 +149,6 @@
 
 -(void)dismissKeyboard
 {
-    [_tfFirstName resignFirstResponder];
-    [_tfLastName resignFirstResponder];
     [_tfCity resignFirstResponder];
     [_tfArea resignFirstResponder];
 }
@@ -156,14 +157,29 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    
-    if([textField isEqual:_tfCity])
+    if([textField isEqual:_tfState])
     {
-        CitiesTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CitiesTableViewController"];
+        StateTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"StateTableViewController"];
         vc.delegate = self;
         [self.navigationController pushViewController:vc animated:YES];
         [self dismissKeyboard];
         return NO;
+    }
+    else if([textField isEqual:_tfCity])
+    {
+        if(!_selectedState.stateID)
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Please select a state first" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+        }
+        else
+        {
+            CitiesTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CitiesTableViewController"];
+            vc.delegate = self;
+            vc.state = _selectedState;
+            [self.navigationController pushViewController:vc animated:YES];
+            [self dismissKeyboard];
+            return NO;
+        }
     }
     else if([textField isEqual:_tfArea])
     {
@@ -182,16 +198,12 @@
         return NO;
     }
     
-    return YES;
+    return NO;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if([textField isEqual:_tfFirstName])
-    {
-        [_tfLastName becomeFirstResponder];
-    }
-    else if([textField isEqual:_tfLastName])
+    if([textField isEqual:_tfState])
     {
         [_tfCity becomeFirstResponder];
     }
@@ -218,6 +230,12 @@
 {
     _tfArea.text = area.areaName;
     _selectedArea = area;
+}
+
+-(void)stateSlected:(State *)state
+{
+    _tfState.text = state.stateName;
+    _selectedState = state;
 }
 
 @end

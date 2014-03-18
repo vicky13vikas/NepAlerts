@@ -79,7 +79,7 @@
 {
     [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeClear];
     
-    [[AFAppClient sharedClient] GET:@"InfoSevice.svc/GetAllCities"
+    [[AFAppClient sharedClient] GET:[NSString stringWithFormat:@"InfoSevice.svc/GetCitiesOf/%lu",(unsigned long)_state.stateID]
                           parameters:nil
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  [SVProgressHUD dismiss];
@@ -89,6 +89,7 @@
                                  
                                  for (NSDictionary *attributes in response) {
                                      City *city = [[City alloc] initWithAttributes:attributes];
+                                     city.state = _state;
                                      [_citiesList addObject:city];
                                  }
                                  [self.tableView reloadData];

@@ -17,7 +17,7 @@
     }
     
     self.cityID = (NSUInteger)[[attributes valueForKeyPath:@"id"] integerValue];
-    self.cityName = [attributes valueForKeyPath:@"name"];
+    self.cityName = [attributes valueForKeyPath:@"city"];
         
     return self;
 }

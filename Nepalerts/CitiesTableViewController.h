@@ -18,5 +18,6 @@
 @interface CitiesTableViewController : UITableViewController
 
 @property (nonatomic, strong) id<CityDelegate> delegate;
+@property (nonatomic, strong) State *state;
 
 @end
