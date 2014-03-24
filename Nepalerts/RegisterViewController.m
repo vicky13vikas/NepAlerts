@@ -16,6 +16,8 @@
 #import "City.h"
 #import "Area.h"
 
+@import CoreLocation;
+
 @interface RegisterViewController ()<StateDelegate, CityDelegate, AreaDelegate>
 {
     BOOL isKeyboardVisible;
@@ -28,6 +30,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfCity;
 @property (weak, nonatomic) IBOutlet UITextField *tfArea;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (readonly) CLLocationCoordinate2D currentUserCoordinate;
 
 @end
 
@@ -46,6 +51,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    [self startUpdatingCurrentLocation];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -157,6 +164,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    /*
     if([textField isEqual:_tfState])
     {
         StateTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"StateTableViewController"];
@@ -197,7 +205,7 @@
         }
         return NO;
     }
-    
+    */
     return NO;
 }
 
@@ -236,6 +244,111 @@
 {
     _tfState.text = state.stateName;
     _selectedState = state;
+}
+
+
+#pragma mark - CLLocationManagerDelegate
+
+- (void)startUpdatingCurrentLocation
+{
+    // if location services are restricted do nothing
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied ||
+        [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted )
+    {
+        return;
+    }
+    
+    // if locationManager does not currently exist, create it
+    if (!_locationManager)
+    {
+        _locationManager = [[CLLocationManager alloc] init];
+        [_locationManager setDelegate:self];
+        _locationManager.distanceFilter = 10.0f; // we don't need to be any more accurate than 10m
+        _locationManager.purpose = @"This may be used to obtain your reverse geocoded address";
+    }
+    
+    [_locationManager startUpdatingLocation];
+    
+    //    [self showCurrentLocationSpinner:YES];
+}
+
+- (void)stopUpdatingCurrentLocation
+{
+    [_locationManager stopUpdatingLocation];
+    
+    //    [self showCurrentLocationSpinner:NO];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    // if the location is older than 30s ignore
+    if (fabs([newLocation.timestamp timeIntervalSinceDate:[NSDate date]]) > 30)
+    {
+        return;
+    }
+    
+    _currentUserCoordinate = [newLocation coordinate];
+    
+    [self performCoordinateGeocode];
+    //    [self stopUpdatingCurrentLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", error);
+    
+    // stop updating
+    //    [self stopUpdatingCurrentLocation];
+    
+    // since we got an error, set selected location to invalid location
+    _currentUserCoordinate = kCLLocationCoordinate2DInvalid;
+    
+    // show the error alert
+    //    UIAlertView *alert = [[UIAlertView alloc] init];
+    //    alert.title = @"Error updating location";
+    //    alert.message = [error localizedDescription];
+    //    [alert addButtonWithTitle:@"OK"];
+    //    [alert show];
+}
+
+- (void)performCoordinateGeocode
+{
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    
+    CLLocationCoordinate2D coord = _currentUserCoordinate;
+    
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
+    
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (error){
+            NSLog(@"Geocode failed with error: %@", error);
+            //            [self displayError:error];
+            return;
+        }
+        NSLog(@"Received placemarks: %@", placemarks);
+        [self displayPlacemarks:placemarks];
+    }];
+}
+
+-(void)displayPlacemarks:(NSArray*)placemarks
+{
+    CLPlacemark *placeMarkToShow = placemarks[0];
+    
+    if(placeMarkToShow.administrativeArea.length > 0)
+    {
+        _tfState.text = placeMarkToShow.administrativeArea;
+    }
+    if(placeMarkToShow.locality.length > 0)
+    {
+        _tfCity.text = placeMarkToShow.locality;
+    }
+    if(placeMarkToShow.thoroughfare.length > 0)
+    {
+        _tfArea.text = placeMarkToShow.thoroughfare;
+    }
+    
+    [self stopUpdatingCurrentLocation];
 }
 
 @end
