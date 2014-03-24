@@ -52,7 +52,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self startUpdatingCurrentLocation];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -61,6 +60,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    [self startUpdatingCurrentLocation];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -117,9 +118,11 @@
 
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults] valueForKey:DEVICE_TOKEN];
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [NSString stringWithFormat:@"%lu",(unsigned long)_selectedArea.areaID], @"areaId",
-                                @"Simulator", @"regId",
-                                @"iOS", @"osType",
+                                _tfState.text, @"State",
+                                _tfCity.text, @"City",
+                                _tfArea.text, @"Area",
+                                deviceToken, @"RegId",
+                                @"iOS", @"OS",
                                 nil];
     
     return parameters;
@@ -139,7 +142,7 @@
 
                                  NSLog(@"%@", string);
                                  
-                                 if([string isEqualToString:@"1"])
+                                 if(![string isEqualToString:@"-1"])
                                  {
                                      [[[UIAlertView alloc] initWithTitle:@"Nep Alerts" message:@"Submitted Successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
                                  }
@@ -251,6 +254,10 @@
 
 - (void)startUpdatingCurrentLocation
 {
+    SVProgressHUD *progressHud = [SVProgressHUD appearance];
+    progressHud.hudBackgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    [SVProgressHUD showWithStatus:@"Fetching Location..." maskType:SVProgressHUDMaskTypeClear];
+
     // if location services are restricted do nothing
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied ||
         [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted )
@@ -274,6 +281,8 @@
 
 - (void)stopUpdatingCurrentLocation
 {
+    [SVProgressHUD dismiss];
+
     [_locationManager stopUpdatingLocation];
     
     //    [self showCurrentLocationSpinner:NO];
@@ -281,6 +290,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
+
     // if the location is older than 30s ignore
     if (fabs([newLocation.timestamp timeIntervalSinceDate:[NSDate date]]) > 30)
     {
@@ -295,8 +305,12 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
+    [SVProgressHUD dismiss];
+
     NSLog(@"%@", error);
     
+    [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Error Loading location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+
     // stop updating
     //    [self stopUpdatingCurrentLocation];
     
@@ -321,6 +335,7 @@
     CLLocation *location = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
     
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        [SVProgressHUD dismiss];
         if (error){
             NSLog(@"Geocode failed with error: %@", error);
             //            [self displayError:error];
@@ -343,12 +358,16 @@
     {
         _tfCity.text = placeMarkToShow.locality;
     }
+    else
+    {
+        _tfCity.text = placeMarkToShow.thoroughfare;
+    }
     if(placeMarkToShow.thoroughfare.length > 0)
     {
         _tfArea.text = placeMarkToShow.thoroughfare;
     }
     
-    [self stopUpdatingCurrentLocation];
+//    [self stopUpdatingCurrentLocation];
 }
 
 @end
