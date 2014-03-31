@@ -11,9 +11,6 @@
 #import "SVProgressHUD.h"
 
 @interface AreasTableViewController ()
-{
-    NSMutableArray *   _areaList;
-}
 
 @end
 
@@ -31,9 +28,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _areaList = [[NSMutableArray alloc] init];
     
-    [self requestAreasForCurrentCity];
+//    [self requestAreasForCurrentCity];
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,7 +51,7 @@
     static NSString *CellIdentifier = @"AreaCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = [_areaList[indexPath.row] areaName];
+    cell.textLabel.text = _areaList[indexPath.row] ;
     // Configure the cell...
     
     return cell;
@@ -68,7 +64,7 @@
 }
 
 #pragma mark - Server Request
-
+/*
 -(void)requestAreasForCurrentCity
 {
     [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeClear];
@@ -94,5 +90,5 @@
                             }];
     
 }
-
+*/
 @end

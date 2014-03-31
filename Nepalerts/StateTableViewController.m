@@ -12,9 +12,6 @@
 #import "State.h"
 
 @interface StateTableViewController ()
-{
-    NSMutableArray *   _statesList;
-}
 
 @end
 
@@ -32,8 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _statesList = [[NSMutableArray alloc] init];
-    [self requsetListOfStates];
+//    [self requsetListOfStates];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,7 +57,7 @@
     static NSString *CellIdentifier = @"StateCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = [((State*)_statesList[indexPath.row]) stateName];
+    cell.textLabel.text = _statesList[indexPath.row];
     
     return cell;
 }
@@ -73,7 +69,7 @@
 }
 
 #pragma mark - Sever Request -
-
+/*
 -(void)requsetListOfStates
 {
     [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeClear];
@@ -98,6 +94,6 @@
                             }];
     
 }
-
+*/
 
 @end

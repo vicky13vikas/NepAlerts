@@ -18,4 +18,6 @@
 
 @property (nonatomic, strong) id<StateDelegate> delegate;
 
+@property (nonatomic, strong) NSArray *statesList;
+
 @end

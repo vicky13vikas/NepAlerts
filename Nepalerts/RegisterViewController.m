@@ -16,14 +16,33 @@
 #import "City.h"
 #import "Area.h"
 
+#import "PlacesLoader.h"
+#import "Place.h"
+
+#define API_KEY @"AIzaSyAs2YcG1A5CyS9jr00mxubl_LynXa80w8Q"
+
+
+NSString * const kNameKey = @"name";
+NSString * const kReferenceKey = @"reference";
+NSString * const kAddressKey = @"vicinity";
+NSString * const kLatiudeKeypath = @"geometry.location.lat";
+NSString * const kLongitudeKeypath = @"geometry.location.lng";
+
 @import CoreLocation;
 
 @interface RegisterViewController ()<StateDelegate, CityDelegate, AreaDelegate>
 {
     BOOL isKeyboardVisible;
-    State * _selectedState;
-    City * _selectedCity;
-    Area * _selectedArea;
+    NSString * _selectedState;
+    NSString * _selectedCity;
+    NSString * _selectedArea;
+    NSMutableArray *_placesList;
+    NSMutableArray *_addressDetailList;
+    NSInteger _totalRequests;
+    NSInteger _totalResponses;
+    NSMutableArray *_states;
+    NSMutableArray *_cities;
+    NSMutableArray *_areas;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *tfState;
@@ -51,6 +70,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    _placesList = [[NSMutableArray alloc] init];
+    _addressDetailList = [[NSMutableArray alloc] init];
+    _states = [[NSMutableArray alloc] init];
+    _cities = [[NSMutableArray alloc] init];
+    _areas = [[NSMutableArray alloc] init];
     
 }
 
@@ -61,7 +85,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    [self startUpdatingCurrentLocation];
+    if (_states.count == 0 || _cities.count == 0 || _areas.count == 0)
+    {
+        [self startUpdatingCurrentLocation];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -115,7 +142,6 @@
 
 -(NSDictionary *)getParameters
 {
-
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults] valueForKey:DEVICE_TOKEN];
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                                 _tfState.text, @"State",
@@ -167,18 +193,19 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    /*
+    
     if([textField isEqual:_tfState])
     {
         StateTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"StateTableViewController"];
         vc.delegate = self;
+        vc.statesList = _states;
         [self.navigationController pushViewController:vc animated:YES];
         [self dismissKeyboard];
         return NO;
     }
     else if([textField isEqual:_tfCity])
     {
-        if(!_selectedState.stateID)
+        if(!_selectedState)
         {
             [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Please select a state first" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
         }
@@ -186,7 +213,7 @@
         {
             CitiesTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CitiesTableViewController"];
             vc.delegate = self;
-            vc.state = _selectedState;
+            vc.citiesList = _cities;
             [self.navigationController pushViewController:vc animated:YES];
             [self dismissKeyboard];
             return NO;
@@ -194,7 +221,7 @@
     }
     else if([textField isEqual:_tfArea])
     {
-        if(!_selectedCity.cityID)
+        if(!_selectedCity)
         {
             [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Please select a city first" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
         }
@@ -202,13 +229,12 @@
         {
             AreasTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AreasTableViewController"];
             vc.delegate = self;
-            vc.city = _selectedCity;
+            vc.areaList = _areas;
             [self.navigationController pushViewController:vc animated:YES];
             [self dismissKeyboard];
         }
         return NO;
     }
-    */
     return NO;
 }
 
@@ -229,23 +255,23 @@
     return YES;
 }
 
-- (void)citySlected:(City*)city
+- (void)citySlected:(NSString*)city
 {
     _selectedArea = nil;
     _tfArea.text = nil;
-    _tfCity.text = city.cityName;
+    _tfCity.text = city;
     _selectedCity = city;
 }
 
--(void) areaSlected:(Area *)area forCity:(City *)city
+-(void) areaSlected:(NSString *)area forCity:(NSString *)city
 {
-    _tfArea.text = area.areaName;
+    _tfArea.text = area;
     _selectedArea = area;
 }
 
--(void)stateSlected:(State *)state
+-(void)stateSlected:(NSString *)state
 {
-    _tfState.text = state.stateName;
+    _tfState.text = state;
     _selectedState = state;
 }
 
@@ -299,7 +325,8 @@
     
     _currentUserCoordinate = [newLocation coordinate];
     
-    [self performCoordinateGeocode];
+    [self loadNearByPlaces];
+//    [self performCoordinateGeocode];
     //    [self stopUpdatingCurrentLocation];
 }
 
@@ -368,6 +395,160 @@
     }
     
 //    [self stopUpdatingCurrentLocation];
+}
+
+#pragma - google places -
+
+- (void)loadNearByPlaces
+{
+    CLLocationCoordinate2D coord = _currentUserCoordinate;
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
+    
+    [[PlacesLoader sharedInstance] loadPOIsForLocation:location radius:1000 successHanlder:^(NSDictionary *response) {
+        if([[response objectForKey:@"status"] isEqualToString:@"OK"])
+        {
+            id places = [response objectForKey:@"results"];
+            NSMutableArray *temp = [NSMutableArray array];
+            
+            if([places isKindOfClass:[NSArray class]])
+            {
+                for(NSDictionary *resultsDict in places)
+                {
+                    CLLocation *location = [[CLLocation alloc] initWithLatitude:[[resultsDict valueForKeyPath:kLatiudeKeypath] floatValue] longitude:[[resultsDict valueForKeyPath:kLongitudeKeypath] floatValue]];
+                    Place *currentPlace = [[Place alloc] initWithLocation:location reference:[resultsDict objectForKey:kReferenceKey] name:[resultsDict objectForKey:kNameKey] address:[resultsDict objectForKey:kAddressKey]];
+                    [temp addObject:currentPlace];
+                }
+                _placesList = [temp copy];
+                [self getPlacesDetail];
+            }
+        }
+        else
+            [SVProgressHUD dismiss];
+    } errorHandler:^(NSError *error) {
+        [SVProgressHUD dismiss];
+        NSLog(@"Error: %@", error);
+    }];
+}
+
+-(void)getPlacesDetail
+{
+    [_addressDetailList removeAllObjects];
+    _totalRequests = _placesList.count;
+    _totalResponses = 0;
+    for(Place *place in _placesList)
+    {
+        [self getPlaceDetailForPlace:place];
+    }
+}
+
+-(void)getPlaceDetailForPlace:(Place*)place
+{
+    AFHTTPRequestOperationManager *client = [AFHTTPRequestOperationManager manager];
+    
+    NSString *urlString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/json?reference=%@&sensor=true&key=%@", place.reference, API_KEY];
+    
+    [client GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        _totalResponses++;
+        [_addressDetailList addObject:[[responseObject valueForKey:@"result"] valueForKey:@"address_components"]];
+        [self checkIfRequestsCompleted];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        _totalResponses++;
+        NSLog(@"%@", error);
+        [self checkIfRequestsCompleted];
+    }];
+}
+
+-(void) checkIfRequestsCompleted
+{
+    if(_totalResponses == _totalRequests)
+    {
+        [SVProgressHUD dismiss];
+        [self stopUpdatingCurrentLocation];
+        [self parseAllAddress];
+    }
+}
+
+-(void)parseAllAddress
+{
+    for(NSArray *array in _addressDetailList)
+    {
+        for(id item in array)
+        {
+            NSArray *types = [item valueForKey:@"types"];
+            
+            //Parsing State
+            if([types containsObject:@"administrative_area_level_1"])
+            {
+                if(![_states containsObject:[item valueForKey:@"long_name"]])
+                    [_states addObject:[item valueForKey:@"long_name"]];
+            }
+            else if([types containsObject:@"administrative_area_level_2"])
+            {
+                if(![_states containsObject:[item valueForKey:@"long_name"]])
+                    [_states addObject:[item valueForKey:@"long_name"]];
+            }
+            else if([types containsObject:@"administrative_area_level_3"])
+            {
+                if(![_states containsObject:[item valueForKey:@"long_name"]])
+                    [_states addObject:[item valueForKey:@"long_name"]];
+            }
+            
+            
+            //Parsing Cities
+            if([types containsObject:@"locality"])
+            {
+                if(![_cities containsObject:[item valueForKey:@"long_name"]])
+                    [_cities addObject:[item valueForKey:@"long_name"]];
+            }
+            else if([types containsObject:@"sublocality"])
+            {
+                if(![_cities containsObject:[item valueForKey:@"long_name"]])
+                    [_cities addObject:[item valueForKey:@"long_name"]];
+            }
+            else if([types containsObject:@"sublocality_level_4"])
+            {
+                if(![_cities containsObject:[item valueForKey:@"long_name"]])
+                    [_cities addObject:[item valueForKey:@"long_name"]];
+            }
+            else if([types containsObject:@"sublocality_level_5"])
+            {
+                if(![_cities containsObject:[item valueForKey:@"long_name"]])
+                    [_cities addObject:[item valueForKey:@"long_name"]];
+            }
+            else if([types containsObject:@"sublocality_level_3"])
+            {
+                if(![_cities containsObject:[item valueForKey:@"long_name"]])
+                    [_cities addObject:[item valueForKey:@"long_name"]];
+            }
+            else if([types containsObject:@"sublocality_level_2"])
+            {
+                if(![_cities containsObject:[item valueForKey:@"long_name"]])
+                    [_cities addObject:[item valueForKey:@"long_name"]];
+            }
+            else if([types containsObject:@"sublocality_level_2"])
+            {
+                if(![_cities containsObject:[item valueForKey:@"long_name"]])
+                    [_cities addObject:[item valueForKey:@"long_name"]];
+            }
+            else if([types containsObject:@"sublocality_level_1"])
+            {
+                if(![_cities containsObject:[item valueForKey:@"long_name"]])
+                    [_cities addObject:[item valueForKey:@"long_name"]];
+            }
+            
+            //Parsing Areas
+            if([types containsObject:@"route"])
+            {
+                if(![_areas containsObject:[item valueForKey:@"long_name"]])
+                    [_areas addObject:[item valueForKey:@"long_name"]];
+            }
+            else if([types containsObject:@"street_address"])
+            {
+                if(![_areas containsObject:[item valueForKey:@"long_name"]])
+                    [_areas addObject:[item valueForKey:@"long_name"]];
+            }
+        }
+    }
 }
 
 @end

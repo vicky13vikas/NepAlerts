@@ -12,9 +12,6 @@
 #import "City.h"
 
 @interface CitiesTableViewController ()
-{
-    NSMutableArray *   _citiesList;
-}
 
 @end
 
@@ -32,8 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _citiesList = [[NSMutableArray alloc] init];
-    [self requsetListOfCities];
+//    [self requsetListOfCities];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,7 +57,7 @@
     static NSString *CellIdentifier = @"CityCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = [((City*)_citiesList[indexPath.row]) cityName];
+    cell.textLabel.text = _citiesList[indexPath.row];
     // Configure the cell...
     
     return cell;
@@ -74,7 +70,7 @@
 }
 
 #pragma mark - Sever Request -
-
+/*
 -(void)requsetListOfCities
 {
     [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeClear];
@@ -100,5 +96,5 @@
                              }];
 
 }
-
+*/
 @end

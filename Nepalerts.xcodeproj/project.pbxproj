@@ -13,6 +13,8 @@
 		09C3063F18CDC0BB009B2C8E /* nextArr.png in Resources */ = {isa = PBXBuildFile; fileRef = 09C3063E18CDC0BB009B2C8E /* nextArr.png */; };
 		09C3064518CDC17E009B2C8E /* AreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3064418CDC17E009B2C8E /* AreasTableViewController.m */; };
 		0E989016427E4360BF2E6F87 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6923E63613D46D0AFB15CA3 /* libPods.a */; };
+		4E157BC818E7CC5E008B9DB7 /* PlacesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E157BC718E7CC5E008B9DB7 /* PlacesLoader.m */; };
+		4E157BCB18E7CCBE008B9DB7 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E157BCA18E7CCBE008B9DB7 /* Place.m */; };
 		4E5E364E18CA101400401EA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5E364D18CA101400401EA1 /* Foundation.framework */; };
 		4E5E365018CA101400401EA1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5E364F18CA101400401EA1 /* CoreGraphics.framework */; };
 		4E5E365218CA101400401EA1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5E365118CA101400401EA1 /* UIKit.framework */; };
@@ -53,6 +55,10 @@
 		09C3064318CDC17E009B2C8E /* AreasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreasTableViewController.h; sourceTree = "<group>"; };
 		09C3064418CDC17E009B2C8E /* AreasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreasTableViewController.m; sourceTree = "<group>"; };
 		09C9CA7C18CB492D00BBDB58 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		4E157BC618E7CC5E008B9DB7 /* PlacesLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesLoader.h; sourceTree = "<group>"; };
+		4E157BC718E7CC5E008B9DB7 /* PlacesLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesLoader.m; sourceTree = "<group>"; };
+		4E157BC918E7CCBE008B9DB7 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
+		4E157BCA18E7CCBE008B9DB7 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
 		4E5E364A18CA101400401EA1 /* Nepalerts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nepalerts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E5E364D18CA101400401EA1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4E5E364F18CA101400401EA1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -171,6 +177,10 @@
 				09C9CA7C18CB492D00BBDB58 /* Constants.h */,
 				4E5E366518CA101400401EA1 /* Images.xcassets */,
 				4E5E365418CA101400401EA1 /* Supporting Files */,
+				4E157BC618E7CC5E008B9DB7 /* PlacesLoader.h */,
+				4E157BC718E7CC5E008B9DB7 /* PlacesLoader.m */,
+				4E157BC918E7CCBE008B9DB7 /* Place.h */,
+				4E157BCA18E7CCBE008B9DB7 /* Place.m */,
 			);
 			path = Nepalerts;
 			sourceTree = "<group>";
@@ -350,11 +360,13 @@
 				09C3064518CDC17E009B2C8E /* AreasTableViewController.m in Sources */,
 				09C3063D18CDBDFE009B2C8E /* Area.m in Sources */,
 				4E5E365E18CA101400401EA1 /* AppDelegate.m in Sources */,
+				4E157BCB18E7CCBE008B9DB7 /* Place.m in Sources */,
 				4EAED37418D8B5E300B11BCA /* State.m in Sources */,
 				4E5E368718CA13A600401EA1 /* RegisterViewController.m in Sources */,
 				09C3063A18CD93B5009B2C8E /* City.m in Sources */,
 				4E5E365A18CA101400401EA1 /* main.m in Sources */,
 				4EAED37718D8B6C900B11BCA /* StateTableViewController.m in Sources */,
+				4E157BC818E7CC5E008B9DB7 /* PlacesLoader.m in Sources */,
 				4EAB07F018CB977200549BEE /* AFAppClient.m in Sources */,
 				09C3063518CD8357009B2C8E /* CitiesTableViewController.m in Sources */,
 			);

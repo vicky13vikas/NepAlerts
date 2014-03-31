@@ -20,4 +20,6 @@
 @property (nonatomic, strong) id<AreaDelegate> delegate;
 @property (nonatomic, strong) City *city;
 
+@property (nonatomic, strong) NSArray *areaList;
+
 @end
