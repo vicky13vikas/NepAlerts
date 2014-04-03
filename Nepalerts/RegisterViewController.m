@@ -189,6 +189,11 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     [_tfArea resignFirstResponder];
 }
 
+- (IBAction)refreshTapped:(id)sender
+{
+    [self startUpdatingCurrentLocation];
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -422,8 +427,13 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
                 [self getPlacesDetail];
             }
         }
+        else if(!response)
+            [self loadNearByPlaces];
         else
+        {
             [SVProgressHUD dismiss];
+            [[[UIAlertView alloc] initWithTitle:@"Location Error" message:@"Unable to fetch location details." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        }
     } errorHandler:^(NSError *error) {
         [SVProgressHUD dismiss];
         NSLog(@"Error: %@", error);
@@ -465,6 +475,14 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
         [SVProgressHUD dismiss];
         [self stopUpdatingCurrentLocation];
         [self parseAllAddress];
+        
+        _selectedState = _states[0];
+        _selectedCity = _cities[0];
+        _selectedArea = _areas[0];
+        
+        _tfState.text = _selectedState;
+        _tfCity.text = _selectedCity;
+        _tfArea.text = _selectedArea;
     }
 }
 
