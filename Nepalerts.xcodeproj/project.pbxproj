@@ -29,6 +29,12 @@
 		4E5E367718CA101400401EA1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E5E367518CA101400401EA1 /* InfoPlist.strings */; };
 		4E5E367918CA101400401EA1 /* NepalertsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E367818CA101400401EA1 /* NepalertsTests.m */; };
 		4E5E368718CA13A600401EA1 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E368618CA13A600401EA1 /* RegisterViewController.m */; };
+		4E79C3F018EB2A0500BC928A /* Nigeria_blank_outline_map.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4E79C3EF18EB2A0500BC928A /* Nigeria_blank_outline_map.gif */; };
+		4E79C3F318EB2C4F00BC928A /* BorderedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E79C3F218EB2C4F00BC928A /* BorderedButton.m */; };
+		4E79C3F618EB2F4300BC928A /* StateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E79C3F518EB2F4300BC928A /* StateSelectionViewController.m */; };
+		4E79C3F918EB2F4F00BC928A /* CitySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E79C3F818EB2F4F00BC928A /* CitySelectionViewController.m */; };
+		4E79C3FC18EB32E600BC928A /* AreaSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E79C3FB18EB32E600BC928A /* AreaSelectionViewController.m */; };
+		4E79C3FE18EB445E00BC928A /* nepAlertsTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E79C3FD18EB445E00BC928A /* nepAlertsTitle.png */; };
 		4EAB07F018CB977200549BEE /* AFAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAB07EF18CB977200549BEE /* AFAppClient.m */; };
 		4EAED37418D8B5E300B11BCA /* State.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAED37318D8B5E300B11BCA /* State.m */; };
 		4EAED37718D8B6C900B11BCA /* StateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAED37618D8B6C900B11BCA /* StateTableViewController.m */; };
@@ -78,6 +84,16 @@
 		4E5E367818CA101400401EA1 /* NepalertsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NepalertsTests.m; sourceTree = "<group>"; };
 		4E5E368518CA13A600401EA1 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		4E5E368618CA13A600401EA1 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		4E79C3EF18EB2A0500BC928A /* Nigeria_blank_outline_map.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Nigeria_blank_outline_map.gif; sourceTree = "<group>"; };
+		4E79C3F118EB2C4F00BC928A /* BorderedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BorderedButton.h; sourceTree = "<group>"; };
+		4E79C3F218EB2C4F00BC928A /* BorderedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BorderedButton.m; sourceTree = "<group>"; };
+		4E79C3F418EB2F4300BC928A /* StateSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateSelectionViewController.h; sourceTree = "<group>"; };
+		4E79C3F518EB2F4300BC928A /* StateSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateSelectionViewController.m; sourceTree = "<group>"; };
+		4E79C3F718EB2F4F00BC928A /* CitySelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitySelectionViewController.h; sourceTree = "<group>"; };
+		4E79C3F818EB2F4F00BC928A /* CitySelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitySelectionViewController.m; sourceTree = "<group>"; };
+		4E79C3FA18EB32E600BC928A /* AreaSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaSelectionViewController.h; sourceTree = "<group>"; };
+		4E79C3FB18EB32E600BC928A /* AreaSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaSelectionViewController.m; sourceTree = "<group>"; };
+		4E79C3FD18EB445E00BC928A /* nepAlertsTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nepAlertsTitle.png; sourceTree = "<group>"; };
 		4EAB07EE18CB977200549BEE /* AFAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppClient.h; sourceTree = "<group>"; };
 		4EAB07EF18CB977200549BEE /* AFAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAppClient.m; sourceTree = "<group>"; };
 		4EAED37218D8B5E300B11BCA /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
@@ -174,7 +190,15 @@
 				09C3063418CD8357009B2C8E /* CitiesTableViewController.m */,
 				09C3064318CDC17E009B2C8E /* AreasTableViewController.h */,
 				09C3064418CDC17E009B2C8E /* AreasTableViewController.m */,
+				4E79C3F418EB2F4300BC928A /* StateSelectionViewController.h */,
+				4E79C3F518EB2F4300BC928A /* StateSelectionViewController.m */,
+				4E79C3F718EB2F4F00BC928A /* CitySelectionViewController.h */,
+				4E79C3F818EB2F4F00BC928A /* CitySelectionViewController.m */,
+				4E79C3FA18EB32E600BC928A /* AreaSelectionViewController.h */,
+				4E79C3FB18EB32E600BC928A /* AreaSelectionViewController.m */,
 				09C9CA7C18CB492D00BBDB58 /* Constants.h */,
+				4E79C3F118EB2C4F00BC928A /* BorderedButton.h */,
+				4E79C3F218EB2C4F00BC928A /* BorderedButton.m */,
 				4E5E366518CA101400401EA1 /* Images.xcassets */,
 				4E5E365418CA101400401EA1 /* Supporting Files */,
 				4E157BC618E7CC5E008B9DB7 /* PlacesLoader.h */,
@@ -188,6 +212,8 @@
 		4E5E365418CA101400401EA1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4E79C3FD18EB445E00BC928A /* nepAlertsTitle.png */,
+				4E79C3EF18EB2A0500BC928A /* Nigeria_blank_outline_map.gif */,
 				09C3063E18CDC0BB009B2C8E /* nextArr.png */,
 				4E5E365518CA101400401EA1 /* Nepalerts-Info.plist */,
 				4E5E365618CA101400401EA1 /* InfoPlist.strings */,
@@ -305,6 +331,8 @@
 				4E5E366618CA101400401EA1 /* Images.xcassets in Resources */,
 				4E5E365818CA101400401EA1 /* InfoPlist.strings in Resources */,
 				09C3063F18CDC0BB009B2C8E /* nextArr.png in Resources */,
+				4E79C3FE18EB445E00BC928A /* nepAlertsTitle.png in Resources */,
+				4E79C3F018EB2A0500BC928A /* Nigeria_blank_outline_map.gif in Resources */,
 				4E5E366118CA101400401EA1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,9 +386,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				09C3064518CDC17E009B2C8E /* AreasTableViewController.m in Sources */,
+				4E79C3F918EB2F4F00BC928A /* CitySelectionViewController.m in Sources */,
 				09C3063D18CDBDFE009B2C8E /* Area.m in Sources */,
+				4E79C3F318EB2C4F00BC928A /* BorderedButton.m in Sources */,
 				4E5E365E18CA101400401EA1 /* AppDelegate.m in Sources */,
 				4E157BCB18E7CCBE008B9DB7 /* Place.m in Sources */,
+				4E79C3FC18EB32E600BC928A /* AreaSelectionViewController.m in Sources */,
 				4EAED37418D8B5E300B11BCA /* State.m in Sources */,
 				4E5E368718CA13A600401EA1 /* RegisterViewController.m in Sources */,
 				09C3063A18CD93B5009B2C8E /* City.m in Sources */,
@@ -369,6 +400,7 @@
 				4E157BC818E7CC5E008B9DB7 /* PlacesLoader.m in Sources */,
 				4EAB07F018CB977200549BEE /* AFAppClient.m in Sources */,
 				09C3063518CD8357009B2C8E /* CitiesTableViewController.m in Sources */,
+				4E79C3F618EB2F4300BC928A /* StateSelectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

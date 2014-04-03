@@ -22,11 +22,11 @@
 #define API_KEY @"AIzaSyAs2YcG1A5CyS9jr00mxubl_LynXa80w8Q"
 
 
-NSString * const kNameKey = @"name";
-NSString * const kReferenceKey = @"reference";
-NSString * const kAddressKey = @"vicinity";
-NSString * const kLatiudeKeypath = @"geometry.location.lat";
-NSString * const kLongitudeKeypath = @"geometry.location.lng";
+//NSString * const kNameKey = @"name";
+//NSString * const kReferenceKey = @"reference";
+//NSString * const kAddressKey = @"vicinity";
+//NSString * const kLatiudeKeypath = @"geometry.location.lat";
+//NSString * const kLongitudeKeypath = @"geometry.location.lng";
 
 @import CoreLocation;
 
@@ -87,7 +87,7 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     
     if (_states.count == 0 || _cities.count == 0 || _areas.count == 0)
     {
-        [self startUpdatingCurrentLocation];
+//        [self startUpdatingCurrentLocation];
     }
 }
 
@@ -325,7 +325,7 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     
     _currentUserCoordinate = [newLocation coordinate];
     
-    [self loadNearByPlaces];
+//    [self loadNearByPlaces];
 //    [self performCoordinateGeocode];
     //    [self stopUpdatingCurrentLocation];
 }
@@ -396,7 +396,7 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     
 //    [self stopUpdatingCurrentLocation];
 }
-
+/*
 #pragma - google places -
 
 - (void)loadNearByPlaces
@@ -465,6 +465,14 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
         [SVProgressHUD dismiss];
         [self stopUpdatingCurrentLocation];
         [self parseAllAddress];
+        
+        _selectedState = _states[0];
+        _selectedCity = _cities[0];
+        _selectedArea = _areas[0];
+        
+        _tfState.text = _selectedState;
+        _tfCity.text = _selectedCity;
+        _tfArea.text = _selectedArea;
     }
 }
 
@@ -550,5 +558,6 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
         }
     }
 }
+ */
 
 @end

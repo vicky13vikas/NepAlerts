@@ -59,7 +59,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [_delegate areaSlected:_areaList[indexPath.row] forCity:_city];
+    [_delegate areaSlected:_areaList[indexPath.row]];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

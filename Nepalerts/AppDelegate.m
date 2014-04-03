@@ -25,6 +25,8 @@
       [UIColor whiteColor],
       NSForegroundColorAttributeName,
       nil];
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nepAlertsTitle"] forBarMetrics:UIBarMetricsDefault];
 
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
