@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <scenes>
-        <!--Register View Controller - Nep Alerts-->
+        <!--Register View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="RegisterViewController" sceneMemberID="viewController">
@@ -104,7 +104,7 @@
                             <constraint firstItem="7KP-Sd-ADE" firstAttribute="top" secondItem="hjX-ac-gYz" secondAttribute="bottom" id="pZf-lh-3MC"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Nep Alerts" id="HDy-g9-fUq">
+                    <navigationItem key="navigationItem" id="HDy-g9-fUq">
                         <barButtonItem key="rightBarButtonItem" title="Refresh" id="zqA-fu-Rqj">
                             <connections>
                                 <action selector="refreshTapped:" destination="vXZ-lx-hvc" id="IjS-FX-8Mq"/>

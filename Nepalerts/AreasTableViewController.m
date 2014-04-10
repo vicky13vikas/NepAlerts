@@ -10,7 +10,7 @@
 #import "AFAppClient.h"
 #import "SVProgressHUD.h"
 
-@interface AreasTableViewController ()
+@interface AreasTableViewController ()<UIAlertViewDelegate>
 
 @end
 
@@ -43,7 +43,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _areaList.count;
+    return _areaList.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -51,7 +51,16 @@
     static NSString *CellIdentifier = @"AreaCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = _areaList[indexPath.row] ;
+    if (indexPath.row == 0)
+    {
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:18.0];
+        cell.textLabel.text = @"Could not find your area...." ;
+    }
+    else
+    {
+        cell.textLabel.text = _areaList[indexPath.row - 1] ;
+    }
+    
     // Configure the cell...
     
     return cell;
@@ -59,7 +68,22 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [_delegate areaSlected:_areaList[indexPath.row] forCity:_city];
+    if (indexPath.row == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Area" message:@"Please enter your area" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [alert show];
+    }
+    else
+    {
+        [_delegate areaSlected:_areaList[indexPath.row - 1] forCity:_city];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [_delegate areaSlected:[[alertView textFieldAtIndex:0] text] forCity:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

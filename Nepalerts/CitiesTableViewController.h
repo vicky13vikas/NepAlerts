@@ -10,7 +10,7 @@
 #import "City.h"
 
 @protocol CityDelegate <NSObject>
-- (void)citySlected:(City*)city;
+- (void)citySlected:(NSString*)city;
 
 @end
 

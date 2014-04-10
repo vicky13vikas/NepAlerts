@@ -17,7 +17,8 @@
     // Override point for customization after application launch.
     
     UINavigationBar *navBar = [UINavigationBar appearance];
-    navBar.barTintColor = [UIColor colorWithRed:36/255.0f green:112.0/255.0f blue:176.0/255.0f alpha:1.0];
+//    navBar.barTintColor = [UIColor colorWithRed:36/255.0f green:112.0/255.0f blue:176.0/255.0f alpha:1.0];
+    navBar.barTintColor = [UIColor greenColor];
     navBar.tintColor = [UIColor whiteColor];
     navBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
       [UIColor whiteColor],
@@ -25,6 +26,7 @@
       [UIColor whiteColor],
       NSForegroundColorAttributeName,
       nil];
+    [navBar setBackgroundImage:[UIImage imageNamed:@"nepAlertsTitle"] forBarMetrics:UIBarMetricsDefault];
 
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |

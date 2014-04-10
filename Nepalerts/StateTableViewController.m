@@ -49,7 +49,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return _statesList.count;
+    return _statesList.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -57,14 +57,37 @@
     static NSString *CellIdentifier = @"StateCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = _statesList[indexPath.row];
+    if (indexPath.row == 0)
+    {
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:18.0];
+        cell.textLabel.text = @"Could not find your state...." ;
+    }
+    else
+    {
+        cell.textLabel.text = _statesList[indexPath.row - 1];
+    }
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [_delegate stateSlected:_statesList[indexPath.row]];
+    if (indexPath.row == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Area" message:@"Please enter your area" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [alert show];
+    }
+    else
+    {
+        [_delegate stateSlected:_statesList[indexPath.row - 1]];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+ }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [_delegate stateSlected:[[alertView textFieldAtIndex:0] text]];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

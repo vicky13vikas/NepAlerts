@@ -30,7 +30,7 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
 
 @import CoreLocation;
 
-@interface RegisterViewController ()<StateDelegate, CityDelegate, AreaDelegate>
+@interface RegisterViewController ()<StateDelegate, CityDelegate, AreaDelegate ,CLLocationManagerDelegate>
 {
     BOOL isKeyboardVisible;
     NSString * _selectedState;
@@ -76,6 +76,7 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     _cities = [[NSMutableArray alloc] init];
     _areas = [[NSMutableArray alloc] init];
     
+    [self startUpdatingCurrentLocation];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -85,10 +86,10 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    if (_states.count == 0 || _cities.count == 0 || _areas.count == 0)
-    {
-        [self startUpdatingCurrentLocation];
-    }
+//    if (_states.count == 0 || _cities.count == 0 || _areas.count == 0)
+//    {
+//        [self startUpdatingCurrentLocation];
+//    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -96,6 +97,8 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
+    [self stopUpdatingCurrentLocation];
 }
 
 -(void)keyBoardWillShow:(NSNotification*)notification
@@ -160,7 +163,7 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     progressHud.hudBackgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     [SVProgressHUD showWithStatus:@"Sending..." maskType:SVProgressHUDMaskTypeClear];
     
-    [[AFAppClient sharedClient] POST:@"RegistrationService.svc/StartRegister"
+    [[AFAppClient sharedClient] POST:@"RegistrationService.svc"
                           parameters:[self getParameters]
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  [SVProgressHUD dismiss];
@@ -293,6 +296,7 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied ||
         [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted )
     {
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Make sure if the location services is switched on for this app in the devcie settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         return;
     }
     
@@ -332,7 +336,7 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     
     [self loadNearByPlaces];
 //    [self performCoordinateGeocode];
-    //    [self stopUpdatingCurrentLocation];
+    [self stopUpdatingCurrentLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error

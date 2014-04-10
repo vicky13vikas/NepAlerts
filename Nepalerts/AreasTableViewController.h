@@ -11,7 +11,7 @@
 #import "City.h"
 
 @protocol AreaDelegate <NSObject>
-- (void)areaSlected:(Area*)area forCity:(City*)city;
+- (void)areaSlected:(NSString*)area forCity:(City*)city;
 
 @end
 

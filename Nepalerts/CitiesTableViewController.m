@@ -49,7 +49,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return _citiesList.count;
+    return _citiesList.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -57,7 +57,16 @@
     static NSString *CellIdentifier = @"CityCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = _citiesList[indexPath.row];
+    if (indexPath.row == 0)
+    {
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:18.0];
+        cell.textLabel.text = @"Could not find your city below...." ;
+    }
+    else
+    {
+        cell.textLabel.text = _citiesList[indexPath.row - 1] ;
+    }
+    
     // Configure the cell...
     
     return cell;
@@ -65,7 +74,22 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [_delegate citySlected:_citiesList[indexPath.row]];
+    if (indexPath.row == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Area" message:@"Please enter your area" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [alert show];
+    }
+    else
+    {
+        [_delegate citySlected:_citiesList[indexPath.row - 1]];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [_delegate citySlected:[[alertView textFieldAtIndex:0] text]];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

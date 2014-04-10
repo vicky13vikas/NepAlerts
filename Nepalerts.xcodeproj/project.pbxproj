@@ -32,6 +32,7 @@
 		4EAB07F018CB977200549BEE /* AFAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAB07EF18CB977200549BEE /* AFAppClient.m */; };
 		4EAED37418D8B5E300B11BCA /* State.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAED37318D8B5E300B11BCA /* State.m */; };
 		4EAED37718D8B6C900B11BCA /* StateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAED37618D8B6C900B11BCA /* StateTableViewController.m */; };
+		4EB16FA918EFCD0700DEC02B /* nepAlertsTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EB16FA818EFCD0700DEC02B /* nepAlertsTitle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		4EAED37318D8B5E300B11BCA /* State.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = State.m; sourceTree = "<group>"; };
 		4EAED37518D8B6C900B11BCA /* StateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateTableViewController.h; sourceTree = "<group>"; };
 		4EAED37618D8B6C900B11BCA /* StateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateTableViewController.m; sourceTree = "<group>"; };
+		4EB16FA818EFCD0700DEC02B /* nepAlertsTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nepAlertsTitle.png; sourceTree = "<group>"; };
 		D6923E63613D46D0AFB15CA3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9EB8F550CB64DA4AB15EBC6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,6 +190,7 @@
 		4E5E365418CA101400401EA1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4EB16FA818EFCD0700DEC02B /* nepAlertsTitle.png */,
 				09C3063E18CDC0BB009B2C8E /* nextArr.png */,
 				4E5E365518CA101400401EA1 /* Nepalerts-Info.plist */,
 				4E5E365618CA101400401EA1 /* InfoPlist.strings */,
@@ -305,6 +308,7 @@
 				4E5E366618CA101400401EA1 /* Images.xcassets in Resources */,
 				4E5E365818CA101400401EA1 /* InfoPlist.strings in Resources */,
 				09C3063F18CDC0BB009B2C8E /* nextArr.png in Resources */,
+				4EB16FA918EFCD0700DEC02B /* nepAlertsTitle.png in Resources */,
 				4E5E366118CA101400401EA1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

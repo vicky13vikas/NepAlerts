@@ -8,7 +8,7 @@
 
 #import "AFAppClient.h"
 
-static NSString * const AFAppDotNetAPIBaseURLString = @"http://210.212.195.100:8088/";
+static NSString * const AFAppDotNetAPIBaseURLString = @"http://210.212.195.110:8888/";
 
 @implementation AFAppClient
 

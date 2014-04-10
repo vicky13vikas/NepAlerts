@@ -10,7 +10,7 @@
 #import "State.h"
 
 @protocol StateDelegate <NSObject>
-- (void)stateSlected:(State*)state;
+- (void)stateSlected:(NSString*)state;
 
 @end
 
