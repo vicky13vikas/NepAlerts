@@ -74,7 +74,7 @@
 {
     if (indexPath.row == 0)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Area" message:@"Please enter your area" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Area" message:@"Please enter your state" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         [alert show];
     }

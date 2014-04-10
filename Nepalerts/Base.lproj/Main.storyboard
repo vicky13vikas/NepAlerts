@@ -79,7 +79,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eo8-Vz-REx">
                                         <rect key="frame" x="123" y="225" width="74" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.14117647058823529" green="0.4392156862745098" blue="0.69019607843137254" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.25490196078431371" green="0.68235294117647061" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Submit">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -104,13 +104,7 @@
                             <constraint firstItem="7KP-Sd-ADE" firstAttribute="top" secondItem="hjX-ac-gYz" secondAttribute="bottom" id="pZf-lh-3MC"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="HDy-g9-fUq">
-                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="zqA-fu-Rqj">
-                            <connections>
-                                <action selector="refreshTapped:" destination="vXZ-lx-hvc" id="IjS-FX-8Mq"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="HDy-g9-fUq"/>
                     <connections>
                         <outlet property="scrollView" destination="7KP-Sd-ADE" id="fbe-J7-21u"/>
                         <outlet property="tfArea" destination="bcw-Ma-Cfj" id="bCx-xt-SNB"/>
