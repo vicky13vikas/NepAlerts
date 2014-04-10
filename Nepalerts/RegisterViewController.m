@@ -182,6 +182,7 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  [SVProgressHUD dismiss];
+                                 [[[UIAlertView alloc] initWithTitle:@"Nep Alerts" message:@"Request Failed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
                                  NSLog(@"%@", error);
                              }];
 }
