@@ -336,7 +336,7 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     _currentUserCoordinate = [newLocation coordinate];
     
     [self loadNearByPlaces];
-//    [self performCoordinateGeocode];
+    [self performCoordinateGeocode];
     [self stopUpdatingCurrentLocation];
 }
 
@@ -372,7 +372,7 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     CLLocation *location = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
     
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-        [SVProgressHUD dismiss];
+//        [SVProgressHUD dismiss];
         if (error){
             NSLog(@"Geocode failed with error: %@", error);
             //            [self displayError:error];
@@ -403,6 +403,15 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     {
         _tfArea.text = placeMarkToShow.thoroughfare;
     }
+    
+    if(![_states containsObject:placeMarkToShow.administrativeArea] && placeMarkToShow.administrativeArea)
+        [_states addObject:placeMarkToShow.administrativeArea];
+    
+    if(![_cities containsObject:placeMarkToShow.locality] && placeMarkToShow.locality)
+        [_cities addObject:placeMarkToShow.locality];
+    
+    if(![_areas containsObject:placeMarkToShow.thoroughfare] && placeMarkToShow.thoroughfare)
+        [_areas addObject:placeMarkToShow.thoroughfare];
     
 //    [self stopUpdatingCurrentLocation];
 }
