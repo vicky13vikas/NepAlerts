@@ -163,7 +163,7 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
     progressHud.hudBackgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     [SVProgressHUD showWithStatus:@"Sending..." maskType:SVProgressHUDMaskTypeClear];
     
-    [[AFAppClient sharedClient] POST:@"RegistrationService.svc"
+    [[AFAppClient sharedClient] POST:@"RegistrationService.svc/StartRegister"
                           parameters:[self getParameters]
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  [SVProgressHUD dismiss];
