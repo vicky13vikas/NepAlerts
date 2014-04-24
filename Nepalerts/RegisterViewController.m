@@ -159,6 +159,8 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
 
 - (IBAction)submitTapped:(id)sender
 {
+    [self saveAddress];
+    
     SVProgressHUD *progressHud = [SVProgressHUD appearance];
     progressHud.hudBackgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     [SVProgressHUD showWithStatus:@"Sending..." maskType:SVProgressHUDMaskTypeClear];
@@ -185,6 +187,14 @@ NSString * const kLongitudeKeypath = @"geometry.location.lng";
                                  [[[UIAlertView alloc] initWithTitle:@"Nep Alerts" message:@"Request Failed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
                                  NSLog(@"%@", error);
                              }];
+}
+
+-(void)saveAddress
+{
+    [[NSUserDefaults standardUserDefaults] setValue:_tfState.text forKey:@"LastRegisterdState"];
+    [[NSUserDefaults standardUserDefaults] setValue:_tfCity.text forKey:@"LastRegisterdCity"];
+    [[NSUserDefaults standardUserDefaults] setValue:_tfArea.text forKey:@"LastRegisterdArea"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(void)dismissKeyboard
