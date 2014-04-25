@@ -9,8 +9,14 @@
 #import "ScheduleViewController.h"
 #import "AFAppClient.h"
 #import "SVProgressHUD.h"
+#import "Notification.h"
 
 @interface ScheduleViewController ()
+{
+    
+}
+
+@property (nonatomic, strong) NSMutableArray *notificationsList;
 
 @end
 
@@ -35,6 +41,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    _notificationsList = [[NSMutableArray alloc] init];
+    
     [self loadMessagesFromServer];
 }
 
@@ -55,15 +63,18 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return 0;
+    return _notificationsList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"ScheduleCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    Notification *notification = _notificationsList[indexPath.row];
+    
+    cell.textLabel.text = notification.date;
+    cell.detailTextLabel.text = notification.message;
     
     return cell;
 }
@@ -84,18 +95,17 @@
                           parameters:nil
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  [SVProgressHUD dismiss];
-                                 NSString *string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                                 NSError *error = nil;
+                                 NSDictionary *response = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:&error];
                                  
-                                 NSLog(@"%@", string);
+                                 [_notificationsList removeAllObjects];
+                                 for (NSDictionary *attributes in response)
+                                 {
+                                     Notification *notification = [[Notification alloc] initWithAttributes:attributes];
+                                     [_notificationsList addObject:notification];
+                                 }
                                  
-                                 if(![string isEqualToString:@"-1"])
-                                 {
-                                     [[[UIAlertView alloc] initWithTitle:@"Nep Alerts" message:@"Submitted Successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-                                 }
-                                 else
-                                 {
-                                     [[[UIAlertView alloc] initWithTitle:@"Nep Alerts" message:@"Request Failed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-                                 }
+                                 [self.tableView reloadData];
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  [SVProgressHUD dismiss];

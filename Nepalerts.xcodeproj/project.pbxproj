@@ -31,6 +31,7 @@
 		4E5E367918CA101400401EA1 /* NepalertsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E367818CA101400401EA1 /* NepalertsTests.m */; };
 		4E5E368718CA13A600401EA1 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E368618CA13A600401EA1 /* RegisterViewController.m */; };
 		4EAB07F018CB977200549BEE /* AFAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAB07EF18CB977200549BEE /* AFAppClient.m */; };
+		4EAD15B3190AC94D00C26266 /* Notification.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAD15B2190AC94D00C26266 /* Notification.m */; };
 		4EAED37418D8B5E300B11BCA /* State.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAED37318D8B5E300B11BCA /* State.m */; };
 		4EAED37718D8B6C900B11BCA /* StateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAED37618D8B6C900B11BCA /* StateTableViewController.m */; };
 		4EB16FA918EFCD0700DEC02B /* nepAlertsTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EB16FA818EFCD0700DEC02B /* nepAlertsTitle.png */; };
@@ -84,6 +85,8 @@
 		4E5E368618CA13A600401EA1 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		4EAB07EE18CB977200549BEE /* AFAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppClient.h; sourceTree = "<group>"; };
 		4EAB07EF18CB977200549BEE /* AFAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAppClient.m; sourceTree = "<group>"; };
+		4EAD15B1190AC94D00C26266 /* Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notification.h; sourceTree = "<group>"; };
+		4EAD15B2190AC94D00C26266 /* Notification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notification.m; sourceTree = "<group>"; };
 		4EAED37218D8B5E300B11BCA /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		4EAED37318D8B5E300B11BCA /* State.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = State.m; sourceTree = "<group>"; };
 		4EAED37518D8B6C900B11BCA /* StateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateTableViewController.h; sourceTree = "<group>"; };
@@ -127,6 +130,8 @@
 				09C3063918CD93B5009B2C8E /* City.m */,
 				09C3063B18CDBDFE009B2C8E /* Area.h */,
 				09C3063C18CDBDFE009B2C8E /* Area.m */,
+				4EAD15B1190AC94D00C26266 /* Notification.h */,
+				4EAD15B2190AC94D00C26266 /* Notification.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -374,6 +379,7 @@
 				4E5E368718CA13A600401EA1 /* RegisterViewController.m in Sources */,
 				4E53BA15190976C6005E28AE /* ScheduleViewController.m in Sources */,
 				09C3063A18CD93B5009B2C8E /* City.m in Sources */,
+				4EAD15B3190AC94D00C26266 /* Notification.m in Sources */,
 				4E5E365A18CA101400401EA1 /* main.m in Sources */,
 				4EAED37718D8B6C900B11BCA /* StateTableViewController.m in Sources */,
 				4E157BC818E7CC5E008B9DB7 /* PlacesLoader.m in Sources */,
